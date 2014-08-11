@@ -6,7 +6,6 @@
 //
 
 #include <iostream>
-#include <ctime>
 #include "/usr/local/include/opencv/cv.h"
 #include "/usr/local/include/opencv/highgui.h"
 #include "/usr/local/include/opencv/cxcore.h"
