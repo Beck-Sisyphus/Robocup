@@ -7,10 +7,6 @@
 
 #include "Robot.h"
 
-int HistogramBins = 256;  
-float HistogramRange1[2]={0,255};  
-float *HistogramRange[1]={&HistogramRange1[0]};
-
 using namespace std;
 
 //得到img这个单通道图像在(x,y)坐标的像素值。
@@ -109,7 +105,7 @@ int CompareHist(const char* imagefile1, const char* imagefile2){
     cvNormalizeHist(Histogram2, 1);  
   
     // CV_COMP_CHISQR,CV_COMP_BHATTACHARYYA这两种都可以用来做直方图的比较，值越小，说明图形越相似  
-    double result = cvCompareHist(Histogram1, Histogram2, CV_COMP_CHISQR);  
+    result = cvCompareHist(Histogram1, Histogram2, CV_COMP_CHISQR);  
 
     cvReleaseImage(&image1);  
     cvReleaseImage(&image2);  

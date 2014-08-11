@@ -5,12 +5,15 @@
 //  Copyright (c) 2014年 Wang PG. All rights reserved.
 //
 
-#include <stdio.h>
+#include <iostream>
+#include <ctime>
 #include "/usr/local/include/opencv/cv.h"
 #include "/usr/local/include/opencv/highgui.h"
 #include "/usr/local/include/opencv/cxcore.h"
 
-
+const int HistogramBins = 256;  
+const float HistogramRange1[2]={0,255};  
+const float *HistogramRange[1]={&HistogramRange1[0]};
 
 int getPixel(IplImage* img,int x, int y);
 //得到img这个单通道图像在(x,y)坐标的像素值。
