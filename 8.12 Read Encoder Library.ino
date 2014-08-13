@@ -12,7 +12,7 @@
         // 可插在Port 1 or 2
     
 //  2. Setup部分，和Serial一样，直接begin就可以
-        void Setup() {
+        void setup() {
             motorLeft.begin();
             motorRight.begin();
 //            Serial.begin(9600)；
