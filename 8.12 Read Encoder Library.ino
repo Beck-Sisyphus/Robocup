@@ -6,17 +6,17 @@
 
 //  其特点如下：
 //  1. Constructer，无需创建MePort Object, 一个 
-        MeEncoderMotor MotorLeft(0x8, 0x00); 
-        MeEncoderMotor MotorRight(0x8, 0x01);
+        MeEncoderMotor motorLeft(0x8, 0x00); 
+        MeEncoderMotor motorRight(0x8, 0x01);
         // 即可完成创建，0x00 and 0x01 are different slots，0x8只是一个固定的参数
         // 可插在Port 1 or 2
     
 //  2. Setup部分，和Serial一样，直接begin就可以
-        Setup() {
-            MotorLeft.begin();
-            MotorRight.begin();
-            Serial.begin(9600)；
-            Serial1.begin(115200); // Communicate to Raspberry Pi
+        void Setup() {
+            motorLeft.begin();
+            motorRight.begin();
+//            Serial.begin(9600)；
+//            Serial1.begin(115200); // Communicate to Raspberry Pi
         }
         
 //  3. Loop 部分可以调用的函数超强，是步进电机加舵机所有能力，
@@ -41,13 +41,13 @@
         // 返回位置！
         float GetCurrentPosition();
         */
-        loop {
-            if (Serial1.read() == CaseOne) {
-                float PositionNow = GetCurrentPosition();
-                if (PositionNow != DestinationOne) {
+        void loop() {
+            //if (Serial1.read() == CaseOne) {
+            //    float PositionNow = GetCurrentPosition();
+            //    if (PositionNow != DestinationOne) {
                     motorLeft.RunSpeedAndTime(100, 5);
                     motorRight.RunSpeedAndTime(100, 5);
                     delay(5000);
-                }
-            }
+            //    }
+            //}
         }
