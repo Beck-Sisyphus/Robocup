@@ -43,20 +43,36 @@ const int startGrabSignal = 101;
 const int getColorSignal = 102;
 
 void loop() {
-    arm.write(rise);
+    arm.write(fall);
     hand.write(handClose);
     int receivedCommand = Serial.read();
-    delay(1000);
-    arm.write(fall); 
-    delay(1000);  
-    hand.write(handOpen);
-    delay(1000);
-    arm.write(knock);
-    delay(200);        
-    arm.write(fall);
-    delay(1000);
-    arm.write(rise);
-    delay(3000);  
+    if (receivedCommand == startGrabSignal){
+        
+        arm.write(rise);
+        delay(500); 
+        
+        // moveStraight(20); // this command wasn't built yet
+        // delay(1000);
+        
+        receivedCommand = Serial.read();
+        while (receivedCommand != getColorSignal) {
+            delay(100);
+            receivedCommand = Serial.read();
+        }
+        
+        arm.write(fall);
+        delay(1000);
+        
+        hand.write(handOpen);
+        delay(1000);  
+        
+        arm.write(knock);
+        delay(200);        
+        arm.write(fall);
+        delay(1000);
+        arm.write(rise);
+        delay(100000);  
+    }
 }
 
 /* Experience note 1:
