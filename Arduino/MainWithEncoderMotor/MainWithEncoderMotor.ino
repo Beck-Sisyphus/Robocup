@@ -32,28 +32,42 @@ void setup()
 void loop()
 {
     // startSlowly();
-    // moveStraight();
+    moveStraight(300);
     // stopSlowly();
     // turnToDegree(90);
-    turnRight();
+    // turnRight();
     // delay(3000);
-    grabOneTube(); 
+    // grabOneTube(); 
 }
 
 // pre: the diameter of the wheel is motorDiameter
 //      the radius to turn is DiameterToTurn
 //      the angle the motor should turn could be calculated as 
 //      motorDiameter * angleMotor =  angleTurning * DiameterToTurn
+// 63 * 3.1416 millimeter per turn
+// 63 * 3.1416 / 360 millimeter per degree
+// 360 / 63 * 3.1416 degree per millimeter 
+
 const int motorDiameter = 63; // in millimeter
-const int DiameterToTurn = 1800; // in millimeter
+const int Pi = 314;
+const float mapConstant = 1.8189;
+
+void moveStraight(int millimeter) {
+    int degreeToTurn = millimeter * 1.8189;
+    Serial.println(degreeToTurn);
+    motorLeft.MoveTo(degreeToTurn, carSpeed);
+    motorRight.MoveTo(-degreeToTurn, -carSpeed);
+    serialFeedback();
+    delay(1000);
+}
 
 int angleNow = 0;
 // post: Turning left for the given angle
 void turnToDegree(int angleTurning) {
     // stopSlowly();
-    int angleTotal = angleTurning * DiameterToTurn / motorDiameter;
-    int turnsTotal = angleTotal / 360;
-    int angleLeft = angleTotal % 360;
+    // int angleTotal = angleTurning * DiameterToTurn / motorDiameter;
+    // int turnsTotal = angleTotal / 360;
+    // int angleLeft = angleTotal % 360;
     angleNow += 180;
     motorLeft.MoveTo(angleNow, 70);
     motorRight.MoveTo(angleNow, 70);
@@ -68,16 +82,6 @@ void turnRight() {
     motorRight.MoveTo(angleNow, 70); 
     serialFeedback();
     delay(1000);
-}
-
-void moveStraight(int millimeter) {
-    // motorLeft.MoveTo(360*500, carSpeed);
-    // motorRight.MoveTo(360*500, -carSpeed);
-    motorLeft.RunTurns(50, -carSpeed);
-    motorRight.RunTurns(50, carSpeed);
-    // delayMicroseconds(1);
-    delay(5000);
-    // delay(1000);  
 }
 
 void startSlowly() {
@@ -152,7 +156,7 @@ void grabOneTube() {
         arm.write(rise);
         delay(500); 
         
-        moveStraight(40); // this command wasn't built yet
+        // moveStraight(40); // this command wasn't built yet
         delay(1000);
         
         receivedCommand = Serial1.read();
