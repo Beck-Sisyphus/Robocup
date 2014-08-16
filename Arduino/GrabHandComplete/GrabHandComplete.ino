@@ -27,7 +27,7 @@ void setup()
     Serial1.begin(115200);
 }
 
-/*
+/* 
 The complete thread to grab the tube
 * 1. rise the arm
 * 2. moveforward to touch the tube
@@ -45,7 +45,7 @@ const int getColorSignal = 102;
 void loop() {
     arm.write(fall);
     hand.write(handClose);
-    int receivedCommand = Serial.read();
+    int receivedCommand = Serial1.read();
     if (receivedCommand == startGrabSignal){
         
         arm.write(rise);
@@ -54,10 +54,10 @@ void loop() {
         // moveStraight(20); // this command wasn't built yet
         // delay(1000);
         
-        receivedCommand = Serial.read();
+        receivedCommand = Serial1.read();
         while (receivedCommand != getColorSignal) {
             delay(100);
-            receivedCommand = Serial.read();
+            receivedCommand = Serial1.read();
         }
         
         arm.write(fall);
@@ -71,8 +71,9 @@ void loop() {
         arm.write(fall);
         delay(1000);
         arm.write(rise);
-        delay(100000);  
+        delay(1000);  
     }
+    delay(10000);
 }
 
 /* Experience note 1:

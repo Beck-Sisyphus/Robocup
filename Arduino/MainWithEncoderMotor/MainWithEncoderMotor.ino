@@ -1,16 +1,17 @@
 #include <Makeblock.h>
+#include <Arduino.h>
 #include <SoftwareSerial.h>
 #include <Wire.h>
-#include <Servo.h>
+#include <Servo.h> // include the Servo library for grabbing
 
 MePort port(PORT_1);
-MeEncoderMotor motorLeft(0x8, 0x00);   //  Motor at slot1
-MeEncoderMotor motorRight(0x8, 0x01);   //  motor at slot2
+MeEncoderMotor motorLeft(0x8, 0x00);    //  Motor at PORT_2, slot1
+MeEncoderMotor motorRight(0x8, 0x01);   //  motor at PORT_2, slot2
 
 Servo arm;  // create servo object to control a servo; The Right side one, now is the blue holding motor
 Servo hand;  // create servo object to control another servo
-int servo2pin =  port.pin1();//attaches the servo on PORT_1 SLOT1 to the servo object
-int servo1pin =  port.pin2();//attaches the servo on PORT_1 SLOT2 to the servo object
+int servo1pin =  port.pin1();//attaches the servo on PORT_1 SLOT1 to the servo object
+int servo2pin =  port.pin2();//attaches the servo on PORT_1 SLOT2 to the servo object
 
 // These constants are for running
 const int carSpeed = 60;
@@ -24,9 +25,8 @@ void setup()
     Serial1.begin(115200);
     
     // This part only works for grabing
-    arm.attach(servo1pin);  // attaches the servo on servopin1
-    hand.attach(servo2pin);  // attaches the servo on servopin2
-    Serial.begin(9600);
+    hand.attach(servo1pin);  // attaches the servo on servopin1
+    arm.attach(servo2pin);  // attaches the servo on servopin2
 }
 
 void loop()
@@ -70,7 +70,7 @@ void turnRight() {
     delay(1000);
 }
 
-void moveStraight() {
+void moveStraight(int millimeter) {
     // motorLeft.MoveTo(360*500, carSpeed);
     // motorRight.MoveTo(360*500, -carSpeed);
     motorLeft.RunTurns(50, -carSpeed);
@@ -121,16 +121,57 @@ void serialFeedback() {
     Serial.println(motorRight.GetCurrentPosition());
 }
 
+
+/* 
+The complete thread to grab the tube
+* 1. rise the arm
+* 2. moveforward to touch the tube
+* 3. detect the color
+* 4. fall the arm
+* 5. open
+*  5.1 knock the grand so the tube can get titer
+* 6. detect if we get the tube
+* 7. left
+*/
+
 // These constants are for grabing
 const int handOpen = 50;
 const int handClose = 115;
 const int rise = 90;
-const int fall = 30;
+const int fall = 40;
+const int knock = 0;
+const int startGrabSignal = 101;
+const int getColorSignal = 102;
 
 void grabOneTube() {
     arm.write(fall);
-    // delay(500);
-    // hand.write(handOpen);
-    delay(1000); 
     hand.write(handClose);
+    int receivedCommand = Serial1.read();
+    if (receivedCommand == startGrabSignal){
+        
+        arm.write(rise);
+        delay(500); 
+        
+        moveStraight(40); // this command wasn't built yet
+        delay(1000);
+        
+        receivedCommand = Serial1.read();
+        while (receivedCommand != getColorSignal) {
+            delay(100);
+            receivedCommand = Serial1.read();
+        }
+        
+        arm.write(fall);
+        delay(1000);
+        
+        hand.write(handOpen);
+        delay(1000);  
+        
+        arm.write(knock);
+        delay(200);        
+        arm.write(fall);
+        delay(1000);
+        arm.write(rise);
+        delay(1000);
+    }
 }
