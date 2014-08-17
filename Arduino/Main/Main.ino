@@ -15,20 +15,27 @@ void setup()
     
     moveBegin();
     servoBegin();
-}
+}chro
 
-
+int distance = 0;
 void loop()
 {
     servoHold();
-
+    delay(processSpeed);
     // startSlowly();
-    // moveStraight(300);
+    distance += 740;
+    moveStraight(distance);
+    delay(processSpeed * 10);
+    turnRight(distance);
+    delay(processSpeed * 3);
+    //distance += 370;
+    //moveStraight(distance);
+    //delay(2000);
+    grabOneTube();
+    delay(processSpeed);
     // stopSlowly();
     // turnToDegree(90);
-    // turnRight();
-    // grabOneTube();
-    remoteService(); 
+    // remoteService(); 
 }
 
 

@@ -13,8 +13,9 @@ int servo2pin =  port.pin2();//attaches the servo on PORT_1 SLOT2 to the servo o
 int headServo =  headPort.pin1();
 
 // These constants are for running
-const int carSpeed = 60;
+const int carSpeed = 30;
 const int slowTime = 100;// in millisecond
+const int processSpeed = 500;
 
 /// move states:
 enum        {GRAB_ONE, MOV_LEFT, MOV_RIGHT, MOV_FORWARD, MOV_BACK, MOV_ROTATE, MOV_STOP};

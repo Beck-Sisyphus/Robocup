@@ -16,6 +16,7 @@ const int handClose = 115;
 const int rise = 90;
 const int fall = 40;
 const int knock = 0;
+const int middle = 60;
 const int startGrabSignal = 101;
 // const int endGrabSignal = 102;
 void servoBegin() {
@@ -30,9 +31,10 @@ void servoHold() {
     delay(100);
     arm.write(rise);
     delay(100);
-    head.write(90);
+    head.write(middle);
     delay(300);
 }
+
 void grabOneTube() {
    //moveStraight(40); 
    //delay(1000);

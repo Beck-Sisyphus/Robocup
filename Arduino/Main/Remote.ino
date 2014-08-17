@@ -3,8 +3,7 @@
 
 // Command constants 
 // Default setting is PID , and special command set different states.
-const char GRAB_ONE_TUBE= 'o'; // grab only one tube
-const char GRAB_TWO_TUBE= 'O'; // grab the second tube
+
 const char MOVE_FORWARD = 'f'; // move forward
 const char MOVE_BACK    = 'b'; // move backwards
 const char MOVE_LEFT    = 'l'; // move left
@@ -12,6 +11,8 @@ const char MOVE_RIGHT   = 'r'; // move right
 const char PIVOT_CCW    = 'C'; // rotate 90 degrees CCW
 const char PIVOT_CW     = 'c'; // rotate 90 degrees CW
 const char PIVOT        = 'p'; // rotation angle (minus rotates CCW)
+const char GRAB_ONE_TUBE= 'g'; // grab only one tube
+const char GRAB_TWO_TUBE= 'G'; // grab the second tube
 const char HALT         = 'h'; // stop moving
 
 // not used in this example
@@ -51,7 +52,7 @@ void processCommand(int cmd, int val) {
   Serial.write(cmd); // echo
   switch(cmd)
   { 
-    case GRAB_ONE_TUBE: changeCmdState(GRAB_ONE);    grabOneTube();   break;
+    case GRAB_ONE_TUBE : changeCmdState(GRAB_ONE);    grabOneTube();   break;
  //  case MOVE_LEFT    : changeCmdState(MOV_LEFT);    moveLeft();      break;
  //  case MOVE_RIGHT   : changeCmdState(MOV_RIGHT);   moveRight();     break;
  //  case MOVE_FORWARD : changeCmdState(MOV_FORWARD); moveForward();   break;
