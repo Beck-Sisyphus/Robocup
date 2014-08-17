@@ -93,11 +93,13 @@ def TurnRight( angle ):
     ser.write(RIGHT)
     ser.write(int(angle))
 
-def TurnClockwise():# Turn 90 degree to right
+def TurnClockwise():
+	#Turn 90 degree to right
 	ser = serial.Serial(ARDUINO_ADDRESS,115200)
     ser.write(CLOCKWIZE)
 
-def TurnCountClockwise():# Turn 90 degree to left
+def TurnCountClockwise():
+	#Turn 90 degree to left
 	ser = serial.Serial(ARDUINO_ADDRESS,115200)
     ser.write(UNCLOCKWIZE)
 

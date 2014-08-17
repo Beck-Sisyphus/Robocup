@@ -64,12 +64,31 @@ void startSlowly() {
   delay(slowTime);
 }
 
+
 // post: return the distance it takes to stop this car, 
 //              in millimeter
 int stopSlowly() {
-  float currentSpeedL = motorLeft.GetCurrentSpeed();
-  float currentSpeedR = motorRight.GetCurrentSpeed();
-  float startSpeed = min(currentSpeedL, currentSpeedR); 
+  int currentSpeedL = motorLeft.GetCurrentSpeed();
+  int currentSpeedR = motorRight.GetCurrentSpeed();
+  int startSpeed = min(currentSpeedL, currentSpeedR); 
+  for (int i = startSpeed / 10; i >= 0 ; i--) {
+    int current = i * 10;
+    motorLeft.RunSpeedAndTime(-current, slowTime * 10);  
+    motorRight.RunSpeedAndTime(current, slowTime * 10);
+    Serial.print("current speed: ");
+    Serial.println(current);
+    delay(slowTime);
+  }
+  motorLeft.RunSpeed(0);
+  motorRight.RunSpeed(0);
+  delay(slowTime);
+  return 0;
+}
+
+int stopFastly() {
+  int currentSpeedL = motorLeft.GetCurrentSpeed();
+  int currentSpeedR = motorRight.GetCurrentSpeed();
+  int startSpeed = min(currentSpeedL, currentSpeedR); 
   for (int i = startSpeed / 10; i >= 0 ; i--) {
     int current = i * 10;
     motorLeft.RunSpeedAndTime(-current, slowTime);  

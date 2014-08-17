@@ -14,7 +14,7 @@ int headServo =  headPort.pin1();
 
 // These constants are for running
 const int carSpeed = 30;
-const int slowTime = 100;// in millisecond
+const int slowTime = 10;// in millisecond
 const int processSpeed = 500;
 
 /// move states:

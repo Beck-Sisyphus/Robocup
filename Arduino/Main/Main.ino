@@ -15,7 +15,7 @@ void setup()
     
     moveBegin();
     servoBegin();
-}chro
+}
 
 int distance = 0;
 void loop()

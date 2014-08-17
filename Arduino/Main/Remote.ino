@@ -13,7 +13,8 @@ const char PIVOT_CW     = 'c'; // rotate 90 degrees CW
 const char PIVOT        = 'p'; // rotation angle (minus rotates CCW)
 const char GRAB_ONE_TUBE= 'g'; // grab only one tube
 const char GRAB_TWO_TUBE= 'G'; // grab the second tube
-const char HALT         = 'h'; // stop moving
+const char HALT_SLOW    = 'h'; // stop moving
+const char HALT_FAST    = 'H'; // stop moving
 
 // not used in this example
 const char MOVE_SPEED        = 's'; 
@@ -52,7 +53,7 @@ void processCommand(int cmd, int val) {
   Serial.write(cmd); // echo
   switch(cmd)
   { 
-    case GRAB_ONE_TUBE : changeCmdState(GRAB_ONE);    grabOneTube();   break;
+    case GRAB_ONE_TUBE: changeCmdState(GRAB_ONE);    grabOneTube();   break;
  //  case MOVE_LEFT    : changeCmdState(MOV_LEFT);    moveLeft();      break;
  //  case MOVE_RIGHT   : changeCmdState(MOV_RIGHT);   moveRight();     break;
  //  case MOVE_FORWARD : changeCmdState(MOV_FORWARD); moveForward();   break;
@@ -60,7 +61,8 @@ void processCommand(int cmd, int val) {
  //  case PIVOT_CCW    : changeCmdState(MOV_ROTATE);  moveRotate(-90); break;
  //  case PIVOT_CW     : changeCmdState(MOV_ROTATE);  moveRotate(90);  break;
  //  case PIVOT        : changeCmdState(MOV_ROTATE);  moveRotate(val); break; 
- //  case HALT         : changeCmdState(MOV_STOP);    moveStop();      break;
+    case HALT_SLOW     : changeCmdState(MOV_STOP);    stopSlowly();      break;
+    case HALT_FAST     : changeCmdState(MOV_STOP);    stopFastly();      break;
  //  case SPEED        : speed = val;             moveSetSpeed(speed); break;
   }    
 }
