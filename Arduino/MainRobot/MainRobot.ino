@@ -26,7 +26,7 @@ void loop()
     distance += 740;
     moveStraight(distance);
     delay(processSpeed * 10);
-    turnRight(distance);
+    turnClockwise(distance);
     delay(processSpeed * 3);
     //distance += 370;
     //moveStraight(distance);

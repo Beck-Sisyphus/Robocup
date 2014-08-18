@@ -42,13 +42,14 @@ void turnToDegree(int angleTurning) {
 
 const int to90Degree = 587;
 const int to270Degree = 1761;
-void turnRight(int angleNow) {
+void turnClockwise (int angleNow) {
   angleNow += to90Degree;
   motorRight.MoveTo(angleNow, carSpeed); 
   motorLeft.MoveTo(angleNow, carSpeed);
   serialFeedback();
   delay(processSpeed);
 }
+
 
 void startSlowly() {
   for (int i = 0; i <= carSpeed / 10 ; i++) {
