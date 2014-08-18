@@ -3,6 +3,7 @@
 #include <SoftwareSerial.h>
 #include <Wire.h>
 #include <Servo.h> // include the Servo library for grabbing
+#include <PID_v1.h>
 #include "robotDefines.h"
 
 void setup()
