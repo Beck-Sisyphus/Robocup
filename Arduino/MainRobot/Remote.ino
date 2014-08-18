@@ -53,10 +53,10 @@ void processCommand(int cmd, int val) {
   Serial.write(cmd); // echo
   switch(cmd)
   { 
-    case GRAB_ONE_TUBE: changeCmdState(GRAB_ONE);    grabOneTube();   break;
+    case GRAB_ONE_TUBE: changeCmdState(GRAB_ONE);     grabOneTube();   break;
  //  case MOVE_LEFT    : changeCmdState(MOV_LEFT);    moveLeft();      break;
  //  case MOVE_RIGHT   : changeCmdState(MOV_RIGHT);   moveRight();     break;
- //  case MOVE_FORWARD : changeCmdState(MOV_FORWARD); moveForward();   break;
+    case MOVE_FORWARD : changeCmdState(MOV_FORWARD);  moveStraight(val);   break;
  //  case MOVE_BACK    : changeCmdState(MOV_BACK);    moveBackward();  break;
  //  case PIVOT_CCW    : changeCmdState(MOV_ROTATE);  moveRotate(-90); break;
  //  case PIVOT_CW     : changeCmdState(MOV_ROTATE);  moveRotate(90);  break;

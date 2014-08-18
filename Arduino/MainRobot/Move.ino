@@ -19,7 +19,7 @@ void moveBegin() {
 void moveStraight(int millimeter) {
   int degreeToTurn = millimeter * mapConstant;
   // Serial.println(degreeToTurn);
-  motorLeft.MoveTo(degreeToTurn, -carSpeed);
+  motorLeft.MoveTo(-degreeToTurn, carSpeed);
   motorRight.MoveTo(degreeToTurn, carSpeed);
   serialFeedback();
   delay(processSpeed);
@@ -28,11 +28,10 @@ void moveStraight(int millimeter) {
 const int to90Degree = 587;
 const int to270Degree = 1761;
 void turnClockwise (int angleNow) {
-  angleNow += to90Degree;
   //motorRight.MoveTo(angleNow, carSpeed); 
   //motorLeft.MoveTo(angleNow, carSpeed);
-  motorRight.MoveTo(angleNow, -carSpeed);
-  motorLeft.MoveTo(angleNow, -carSpeed);
+  motorRight.MoveTo(-angleNow + to90Degree, carSpeed);
+  motorLeft.MoveTo(angleNow + to90Degree, carSpeed);
   serialFeedback();
   delay(processSpeed);
 }
@@ -87,17 +86,6 @@ int stopSlowly() {
 }
 
 int stopFastly() {
-  int currentSpeedL = motorLeft.GetCurrentSpeed();
-  int currentSpeedR = motorRight.GetCurrentSpeed();
-  int startSpeed = min(currentSpeedL, currentSpeedR); 
-  for (int i = startSpeed / 10; i >= 0 ; i--) {
-    int current = i * 10;
-    motorLeft.RunSpeedAndTime(-current, slowTime);  
-    motorRight.RunSpeedAndTime(current, slowTime);
-    Serial.print("current speed: ");
-    Serial.println(current);
-    delay(slowTime);
-  }
   motorLeft.RunSpeed(0);
   motorRight.RunSpeed(0);
   delay(slowTime);

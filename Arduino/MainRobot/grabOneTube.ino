@@ -13,9 +13,9 @@ The complete thread to grab the tube
 // These constants are for grabing
 const int handOpen = 50;
 const int handClose = 115;
-const int rise = 90;
+const int rise = 100;
 const int fall = 40;
-const int knock = 0;
+const int knock = 20;
 const int middle = 60;
 const int startGrabSignal = 101;
 // const int endGrabSignal = 102;
@@ -24,6 +24,7 @@ void servoBegin() {
     hand.attach(servo1pin);  // attaches the servo on servopin1
     arm.attach(servo2pin);  // attaches the servo on servopin2
     head.attach(headServo);
+    head2.attach(headServo2);
 }
 
 void servoHold() {

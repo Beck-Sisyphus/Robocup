@@ -21,15 +21,20 @@ int distance = 0;
 void loop()
 {
     servoHold();
-    delay(processSpeed);
+    delay(processSpeed*4);
     startSlowly();
     distance += 740;
     moveStraight(distance);
     delay(processSpeed * 10);
-    distance += 370;
+    distance += 220;
+    startSlowly();
+    moveStraight(distance);
+    stopSlowly();
     moveStraight(distance);
     delay(processSpeed * 5);
-    grabOneTube();
+    remoteService();
+    delay(processSpeed);
+    remoteService();
     delay(processSpeed);
 }
 
