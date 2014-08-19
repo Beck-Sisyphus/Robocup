@@ -56,7 +56,8 @@ void turnClockwise() {
 }
 
 // post: Turning Right for the given angle
-void turnToDegree(int angleTurning) {
+//       It will turn left if input is negative
+void turnToRight(int angleTurning) {
   int degreeTurning = (int) (angleTurning / 360.0 * 2352);
   degreeCounterL += degreeTurning;
   degreeCounterR += degreeTurning;

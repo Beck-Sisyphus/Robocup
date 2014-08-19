@@ -13,42 +13,65 @@ const float mapConstant = 1.8189;
 void moveBegin() {
   motorLeft.begin();
   motorRight.begin();
+  
+  // Input need to set to receive info
+  Input = analogRead(0);
+  Setpoint = 0;
+
+  //turn the PID on
+  myPID.SetMode(AUTOMATIC);
 }    
 
 // pre: give the distance between two points
-void moveStraight(int millimeter) {
+void moveForward(int millimeter) {
   int degreeToTurn = millimeter * mapConstant;
-  // Serial.println(degreeToTurn);
-  motorLeft.MoveTo(-degreeToTurn, carSpeed);
-  motorRight.MoveTo(degreeToTurn, carSpeed);
+  degreeCounterL -= degreeToTurn;
+  degreeCounterR += degreeToTurn;
+  motorLeft.MoveTo( degreeCounterL, carSpeed);
+  motorRight.MoveTo(degreeCounterR, carSpeed);
   serialFeedback();
   delay(processSpeed);
 }
 
-const int to90Degree = 587;
-const int to270Degree = 1761;
-void turnClockwise (int angleNow) {
-  //motorRight.MoveTo(angleNow, carSpeed); 
-  //motorLeft.MoveTo(angleNow, carSpeed);
-  motorRight.MoveTo(-angleNow + to90Degree, carSpeed);
-  motorLeft.MoveTo(angleNow + to90Degree, carSpeed);
-  serialFeedback();
-  delay(processSpeed);
+void moveBackward(int millimeter) {
+  moveForward(-millimeter);
 }
 
-// post: Turning left for the given angle
-void turnToDegree(int angleTurning) {
-  // stopSlowly();
-  // int angleTotal = angleTurning * DiameterToTurn / motorDiameter;
-  // int turnsTotal = angleTotal / 360;
-  // int angleLeft = angleTotal % 360;
-  int angleNow = 0;
-  angleNow += 180;
-  motorLeft.MoveTo(angleNow, carSpeed);
-  motorRight.MoveTo(angleNow, carSpeed);
+// post: turn to left for 90 degree;
+
+const int turnAround = 2352;
+const int to90Degree = turnAround / 4;
+const int to45Degree = turnAround / 8;
+void turnCountClockwise() {
+  degreeCounterL -= to90Degree;
+  degreeCounterR -= to90Degree;
+  makeTurn( degreeCounterL, degreeCounterR);
+}
+
+// post: turn to right for 90 degree;
+void turnClockwise() {
+  degreeCounterL += to90Degree;
+  degreeCounterR += to90Degree;
+  makeTurn( degreeCounterL, degreeCounterR);
+}
+
+// post: Turning Right for the given angle
+//       It will turn left if input is negative
+void turnToRight(int angleTurning) {
+  int degreeTurning = (int) (angleTurning / 360.0 * 2352);
+  degreeCounterL += degreeTurning;
+  degreeCounterR += degreeTurning;
+  makeTurn( degreeCounterL, degreeCounterR);
+}
+
+// pre: private helper for turning
+void makeTurn(int degreeL, int degreeR) {
+  motorLeft.MoveTo( degreeL, carSpeed);
+  motorRight.MoveTo(degreeR, carSpeed);
   serialFeedback();
   delay(processSpeed);
-}
+} 
+
 
 void startSlowly() {
   for (int i = 0; i <= carSpeed / 10 ; i++) {

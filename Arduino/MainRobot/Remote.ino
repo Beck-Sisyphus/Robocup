@@ -53,11 +53,11 @@ void processCommand(int cmd, int val) {
  //    case GRAB_TWO_TUBE: changeCmdState(GRAB_TWO);     grabOneTube();        break;  
     case MOVE_FORWARD  : changeCmdState(MOV_FORWARD);  moveForward(val);     break;
     case MOVE_BACK     : changeCmdState(MOV_BACK);     moveBackward(val);    break;
-    case PIVOT_CCW     : changeCmdState(MOV_ROTATE);   turnCountClockwise(); break;
-    case PIVOT_CW      : changeCmdState(MOV_ROTATE);   turnClockwise();      break;
+    case PIVOT_CCW     : changeCmdState(MOV_ROTATE_L); turnCountClockwise(); break;
+    case PIVOT_CW      : changeCmdState(MOV_ROTATE_R); turnClockwise();      break;
  //  case MOVE_LEFT    : changeCmdState(MOV_LEFT);     moveLeft();          break;
  //  case MOVE_RIGHT   : changeCmdState(MOV_RIGHT);    moveRight();         break;
- //  case PIVOT        : changeCmdState(MOV_ROTATE);   moveRotate(val); break; 
+    case PIVOT         : changeCmdState(MOV_AROUND);  turnToRight(val);     break; 
     case HALT_SLOW     : changeCmdState(MOV_STOP);     stopSlowly();         break;
     case HALT_FAST     : changeCmdState(MOV_STOP);     stopFastly();         break;
  //  case SPEED        : speed = val;                  moveSetSpeed(speed); break;

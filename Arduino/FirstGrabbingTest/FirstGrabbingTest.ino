@@ -23,14 +23,11 @@ void loop()
     servoHold();
     delay(processSpeed*4);
     startSlowly();
-    distance += 740;
-    moveStraight(distance);
+    moveForward(740);
     delay(processSpeed * 10);
-    distance += 220;
     startSlowly();
-    moveStraight(distance);
+    moveForward(220);
     stopSlowly();
-    moveStraight(distance);
     delay(processSpeed * 5);
     remoteService();
     delay(processSpeed);

@@ -30,6 +30,6 @@ double Setpoint, Input, Output;
 PID myPID(&Input, &Output, &Setpoint,2,5,1, DIRECT);
 
 /// move states:
-enum        {GRAB_ONE, GRAB_TWO, MOV_LEFT, MOV_RIGHT, MOV_FORWARD, MOV_BACK, MOV_ROTATE, MOV_STOP};
-const char* states[] = {"Grab_One", "Grab_Two", "Left", "Right", "Forward", "Back", "Rotate", "Stop"};
+enum        {GRAB_ONE, GRAB_TWO, MOV_LEFT, MOV_RIGHT, MOV_FORWARD, MOV_BACK, MOV_ROTATE_L, MOV_ROTATE_R, MOV_AROUND, MOV_STOP};
+const char* states[] = {"Grab_One", "Grab_Two", "Left", "Right", "Forward", "Back", "Rotate Left", "Rotate Right" , "Turn Around",  "Stop"};
 
