@@ -39,26 +39,47 @@ void moveBackward(int millimeter) {
 
 // post: turn to left for 90 degree;
 
-const int turnAround = 2352;
-const int to90Degree = turnAround / 4;
-const int to45Degree = turnAround / 8;
+const int turnAroundDegree = 2352;
+const double oneCircle = 360.0;
 void turnCountClockwise() {
-  degreeCounterL -= to90Degree;
-  degreeCounterR -= to90Degree;
-  makeTurn( degreeCounterL, degreeCounterR);
+  turnToRight(-90);
 }
 
 // post: turn to right for 90 degree;
 void turnClockwise() {
-  degreeCounterL += to90Degree;
-  degreeCounterR += to90Degree;
-  makeTurn( degreeCounterL, degreeCounterR);
+  turnToRight(90);
+}
+
+// post: safely turn 180 degree without touching the object
+void turnAround() {
+  moveBackward(20);
+  turnToRight(360);
+}
+
+void turnCW45() {
+  turnToRight(45);
+} 
+
+void turnCCW45() {
+  turnToRight(-45);
+}
+
+void turnCW135() {
+  turnToRight(135);
+}
+
+void turnCCW135() {
+  turnToRight(-135);
+}
+
+void turnToLeft(int angleTurning) {
+  turnToRight(-angleTurning);
 }
 
 // post: Turning Right for the given angle
 //       It will turn left if input is negative
 void turnToRight(int angleTurning) {
-  int degreeTurning = (int) (angleTurning / 360.0 * 2352);
+  int degreeTurning = (int) (angleTurning / oneCircle * turnAroundDegree);
   degreeCounterL += degreeTurning;
   degreeCounterR += degreeTurning;
   makeTurn( degreeCounterL, degreeCounterR);
@@ -108,7 +129,7 @@ int stopSlowly() {
   return 0;
 }
 
-int stopFastly() {
+int stopSuddenly() {
   motorLeft.RunSpeed(0);
   motorRight.RunSpeed(0);
   delay(slowTime);
