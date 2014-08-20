@@ -18,17 +18,16 @@ void setup()
     servoBegin();
 }
 
-void loop() {
-    servoHold(); 
-}
-  /*
 void loop()
 {
     servoHold();
-    delay(processSpeed);
+    delay(processSpeed*3);
     startSlowly();
-    moveForward(740);
+    // moveForward(740);
     while (!Serial1.available() ) {
+       startSlowly();
+       moveForward(30);
+       delay(200);
     }
     int cmd = Serial1.read();
     Serial.println(cmd);
@@ -44,7 +43,7 @@ void loop()
     // stopSlowly();
     // remoteService(); 
 }
-*/
+
 
 // Task 1, Steps by Steps
 // 0. rise the arm from the beginning

@@ -5,6 +5,7 @@
 // Default setting is PID , and special command set different states.
 
 const char MOVE_FORWARD = 'f'; // move forward
+const char MOVE_PID     = 'i'; // rotation angle (minus rotates CCW)
 const char MOVE_BACK    = 'b'; // move backwards
 const char MOVE_LEFT    = 'l'; // move left
 const char MOVE_RIGHT   = 'r'; // move right 
@@ -15,7 +16,7 @@ const char PIVOT_CCW_45 = 'Q'; // rotate 45 degrees CCW
 const char PIVOT_CW_135 = 'j'; // rotate 135 degrees CW
 const char PIVOT_CCW_135= 'J'; // rotate 135 degrees CCW
 const char PIVOT_CW_180 = 't'; // rotate 180 degrees (default CW)
-// const char PIVOT        = 'p'; // rotation angle (minus rotates CCW)
+
 const char GRAB_ONE_TUBE= 'g'; // grab only one tube
 const char GRAB_TWO_TUBE= 'G'; // grab the second tube
 const char HALT_SLOW    = 'h'; // stop moving
@@ -38,8 +39,9 @@ void remoteService() {
 
 void processCommand(int cmd) {
   int val = 0;
-  if( cmd == MOVE_RIGHT || cmd == MOVE_LEFT || cmd == MOVE_FORWARD || cmd == MOVE_BACK ) {
+  if( cmd == MOVE_RIGHT || cmd == MOVE_LEFT || cmd == MOVE_FORWARD || cmd == MOVE_BACK || MOVE_PID ) {
     val =  Serial1.parseInt();
+    Serial.println(val);
   }
   processCommand(cmd, val);
 }
@@ -52,6 +54,7 @@ void processCommand(int cmd, int val) {
   //  case GRAB_TWO_TUBE : changeCmdState(GRAB_TWO);     grabOneTube();        break;  
     case MOVE_FORWARD  : changeCmdState(MOV_FORWARD);  moveForward(val);     break;
     case MOVE_BACK     : changeCmdState(MOV_BACK);     moveBackward(val);    break;
+    case MOVE_PID      : changeCmdState(MOV_PID);      movePID(val);         break;
     case PIVOT_CW      : changeCmdState(MOV_ROTATE_R); turnClockwise();      break;
     case PIVOT_CW_45   : changeCmdState(MOV_ROTATE_R); turnCW45();           break;
     case PIVOT_CW_135  : changeCmdState(MOV_ROTATE_R); turnCW135();          break;

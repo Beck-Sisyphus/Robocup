@@ -13,14 +13,19 @@ const float mapConstant = 1.8189;
 void moveBegin() {
   motorLeft.begin();
   motorRight.begin();
-  
-  // Input need to set to receive info
-  Input = analogRead(0);
-  Setpoint = 0;
 
   //turn the PID on
+  Input = 0;
+  Setpoint = 0;
   myPID.SetMode(AUTOMATIC);
 }    
+
+void movePID(int errorInput) {
+  // Input need to set to receive info
+  Input = errorInput;
+  myPID.Compute();
+  Serial.println(Output);
+}
 
 // pre: give the distance between two points
 void moveForward(int millimeter) {
