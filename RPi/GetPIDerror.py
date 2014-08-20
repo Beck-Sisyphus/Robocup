@@ -34,4 +34,7 @@ right_mean /= 30;
 # Set the center row of the img as the SETPOINT
 error =(left_mean + right_mean)/2 - len(It[1][1])/2
 
+ser = serial.Serial('/dev/ttyAMA0',115200)
 print "The error is %s" %error
+ser.write(error)
+#ser.write(str(error))
