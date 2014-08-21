@@ -25,6 +25,7 @@ void movePID(int errorInput) {
   Input = errorInput;
   myPID.Compute();
   Serial.println(Output);
+  motorRight.runSpeed(carSpeed + Output);
 }
 
 // pre: give the distance between two points
