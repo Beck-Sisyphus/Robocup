@@ -28,6 +28,7 @@ void loop()
        startSlowly();
        moveForward(30);
        delay(200);
+       practiceWithLineFinder(isOn);
     }
     int cmd = Serial1.read();
     Serial.println(cmd);

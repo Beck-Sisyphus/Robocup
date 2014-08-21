@@ -18,6 +18,7 @@ void moveBegin() {
   Input = 0;
   Setpoint = 0;
   myPID.SetMode(AUTOMATIC);
+
 }    
 
 void movePID(int errorInput) {
