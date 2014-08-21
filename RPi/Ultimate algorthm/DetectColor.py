@@ -21,5 +21,6 @@ while True:
         print 'black'
     ser = serial.Serial('/dev/ttyAMA0',115200)
     ser.write('g')
+    print color
     del(color)
     time.sleep(1)
