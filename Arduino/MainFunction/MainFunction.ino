@@ -18,23 +18,36 @@ void setup()
     servoBegin();
 }
 
+/*
+void loop() {
+    servoHold();
+    delay(processSpeed * 30);
+    turnAround();
+    delay(processSpeed * 10);
+}
+*/
+
 // Test program for video
 void loop() {
     servoHold();
-    delay(processSpeed * 10);
-    startSlowly();
-    moveForward(740);
-    delay(processSpeed * 30);
-    moveForward(270);
     delay(processSpeed * 20);
+
+    // moveForward(740);
+    moveForward(960);
+    delay(processSpeed * 10);
+    // moveForward(220);
+    // delay(processSpeed * 10);
     grabOneTube();
-    delay(processSpeed * 10);
+    delay(processSpeed * 2);
     moveForward(370);
-    delay(processSpeed * 20);
+    delay(processSpeed * 10);
     releaseOneTube();
+    delay(processSpeed * 2);
     turnAround();
     delay(processSpeed * 10);    
 }
+
+
 /*
 void loop()
 {

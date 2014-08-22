@@ -6,6 +6,7 @@
 // 63 * 3.1416 / 360 millimeter per degree
 // 360 / 63 * 3.1416 degree per millimeter 
 // const int motorDiameter = 63; // in millimeter
+// const int turningDiameter = 180;
 // const int Pi = 314;
 
 const float mapConstant = 1.8189;
@@ -31,6 +32,7 @@ void movePID(int errorInput) {
 
 // pre: give the distance between two points
 void moveForward(int millimeter) {
+  startSlowly();
   int degreeToTurn = millimeter * mapConstant;
   degreeCounterL -= degreeToTurn;
   degreeCounterR += degreeToTurn;
@@ -46,37 +48,37 @@ void moveBackward(int millimeter) {
 
 // post: turn to left for 90 degree;
 
-const int turnAroundDegree = 2352;
-const double oneCircle = 360.0;
+const int turnAroundDegree = 1360;
+const float oneCircle = 360.0;
 void turnCountClockwise() {
-  turnToRight(-90);
+  turnToRight(-90.0);
 }
 
 // post: turn to right for 90 degree;
 void turnClockwise() {
-  turnToRight(90);
+  turnToRight(90.0);
 }
 
 // post: safely turn 180 degree without touching the object
 void turnAround() {
   moveBackward(20);
-  turnToRight(360);
+  turnToRight(360.0);
 }
 
 void turnCW45() {
-  turnToRight(45);
+  turnToRight(45.0);
 } 
 
 void turnCCW45() {
-  turnToRight(-45);
+  turnToRight(-45.0);
 }
 
 void turnCW135() {
-  turnToRight(135);
+  turnToRight(135.0);
 }
 
 void turnCCW135() {
-  turnToRight(-135);
+  turnToRight(-135.0);
 }
 
 void turnToLeft(int angleTurning) {
@@ -85,8 +87,8 @@ void turnToLeft(int angleTurning) {
 
 // post: Turning Right for the given angle
 //       It will turn left if input is negative
-void turnToRight(int angleTurning) {
-  int degreeTurning = (int) (angleTurning / oneCircle * turnAroundDegree);
+void turnToRight(float angleTurning) {
+  int degreeTurning = (int)(angleTurning / oneCircle * turnAroundDegree);
   degreeCounterL += degreeTurning;
   degreeCounterR += degreeTurning;
   makeTurn( degreeCounterL, degreeCounterR);
