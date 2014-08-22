@@ -20,10 +20,12 @@ void setup()
 
 void loop()
 {
-    servoHold();
-    moveForward(30);
-    practiceWithLineFinder(isOn);
-    delay(100);
+    servoRise();
+    // moveForward(740);
+    for (int i = 0; i < 100; i++) {
+        practiceWithLineFinder(isOn);
+    }
+    delay(10000);
 }
 
 

@@ -18,7 +18,7 @@ int headServo =  headPort.pin1();
 int headServo2=  headPort.pin2();
 
 // These constants are for running
-const int carSpeed = 40;
+const int carSpeed = 20;
 const int slowTime = 20;// in millisecond
 const int processSpeed = 800;
 
@@ -30,7 +30,7 @@ int degreeCounterR = 0;
 double Setpoint, Input, Output;
 
 //Specify the links and initial tuning parameters
-PID myPID(&Input, &Output, &Setpoint,5,0.01,0.001, DIRECT);
+PID myPID(&Input, &Output, &Setpoint,1,0.002,0.0002, DIRECT);
 
 /// move states:
 enum        {GRAB_ONE, GRAB_TWO, MOV_LEFT, MOV_RIGHT, MOV_FORWARD, MOV_BACK, MOV_PID, MOV_ROTATE_L, MOV_ROTATE_R, MOV_AROUND, MOV_STOP};

@@ -52,7 +52,7 @@ void servoHold() {
 void grabOneTube() {
    arm.write(rise);
    delay(300);
-   moveForward(180); 
+   moveForward(40); 
    delay(1000);
             
    arm.write(fall);
@@ -67,4 +67,15 @@ void grabOneTube() {
    delay(1000);
    arm.write(rise);
    delay(1000);
+}
+
+void releaseOneTube() {
+  arm.write(fall);
+  delay(1000);
+  hand.write(handClose);
+  delay(1000);
+  arm.write(rise);
+  delay(1000);
+  moveBackward(40);
+  delay(1000);  
 }

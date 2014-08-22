@@ -18,6 +18,24 @@ void setup()
     servoBegin();
 }
 
+// Test program for video
+void loop() {
+    servoHold();
+    delay(processSpeed * 10);
+    startSlowly();
+    moveForward(740);
+    delay(processSpeed * 30);
+    moveForward(270);
+    delay(processSpeed * 20);
+    grabOneTube();
+    delay(processSpeed * 10);
+    moveForward(370);
+    delay(processSpeed * 20);
+    releaseOneTube();
+    turnAround();
+    delay(processSpeed * 10);    
+}
+/*
 void loop()
 {
     servoHold();
@@ -44,6 +62,7 @@ void loop()
     // stopSlowly();
     // remoteService(); 
 }
+*/
 
 
 // Task 1, Steps by Steps

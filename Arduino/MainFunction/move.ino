@@ -37,7 +37,7 @@ void moveForward(int millimeter) {
   motorLeft.MoveTo( degreeCounterL, carSpeed);
   motorRight.MoveTo(degreeCounterR, carSpeed);
   serialFeedback();
-  delay(processSpeed);
+  delay(millimeter / carSpeed * processSpeed);
 }
 
 void moveBackward(int millimeter) {
