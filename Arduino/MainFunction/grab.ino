@@ -21,8 +21,8 @@ const int startGrabSignal = 101;
 // const int endGrabSignal = 102;
 void servoBegin() {
     // This part only works for grabing
-    hand.attach(servo1pin);  // attaches the servo on servopin1
-    arm.attach(servo2pin);  // attaches the servo on servopin2
+    arm.attach(servo1pin);  // attaches the servo on servopin1
+    hand.attach(servo2pin);  // attaches the servo on servopin2
     head.attach(headServo);
     head2.attach(headServo2);
 }
