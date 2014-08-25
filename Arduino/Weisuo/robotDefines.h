@@ -35,7 +35,7 @@ PID myPID(&Input, &Output, &Setpoint,5,0.01,0.001, DIRECT);
 /// move states:
 enum                   { GRAB_ONE ,  GRAB_TWO,MOV_LEFT, MOV_RIGHT, MOV_FORWARD, MOV_BACK, MOV_PID,              MOV_ROTATE_L, MOV_ROTATE_R,     MOV_AROUND,  MOV_STOP, 
                          RED,  GREEN , BLUE , BLACK , WHITE };
-const char* states[] = {"Grab_One", "Grab_Two", "Left", "Right", "Forward", "Back", "Moving with PID control" , "Rotate Left", "Rotate Right" , "Turn Around",  "Stop",
+const char* states[] = {"Grab_One", "Grab_Two", "Left", "Right", "Forward", "Back", "Moving with PID control" , "Rotate Left", "Rotate Right" , "Turn Around",  "Stop"
                          "Color red", "Color green", "Color blue", "Color black", "Color white"};
 int commandState = MOV_STOP;    // what robot is told to do
 

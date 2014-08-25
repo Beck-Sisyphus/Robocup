@@ -6,6 +6,10 @@
 #include <PID_v1.h>
 #include "robotDefines.h"
 
+const int A_State = BLUE;
+const int C_State = GREEN;
+const int E_State = RED;
+
 void setup()
 {
     Serial.begin(9600);
@@ -76,9 +80,7 @@ void loop() {
     moveForward(220);
     delay(processSpeed * 5);
     Serial1.flush();
-    while (!remoteService()) {
-      //  Serial.println("wait");      
-    }
+    commandState = E_State;
     grabOneTube();
     delay(processSpeed * 2);
     moveBackward(260);
@@ -94,10 +96,7 @@ void loop() {
     delay(processSpeed * 2);
     moveForward(220);
     delay(processSpeed * 10);
-    Serial1.flush();
-    while (!remoteService()) {
-      //  Serial.println("wait");      
-    }
+    commandState = C_State;
     grabOneTube();
     delay(processSpeed * 2);
     moveBackward(260);
@@ -111,10 +110,7 @@ void loop() {
     delay(processSpeed * 2);
     moveForward(220);
     delay(processSpeed * 10);
-    Serial1.flush();
-    while (!remoteService()) {
-      //  Serial.println("wait");      
-    }
+    commandState = A_State;
     grabOneTube();
     delay(processSpeed * 2);
     moveBackward(260);
@@ -180,7 +176,6 @@ void putOneObject() {
         turnCountClockwise();
     }
     delay(processSpeed * 2);
-    
 }
 /*
 void loop()
@@ -236,6 +231,4 @@ void loop()
 // 19. go straight to the target 
 // 20. put to the target
 // 21. finish the rest of the two
-
-
 

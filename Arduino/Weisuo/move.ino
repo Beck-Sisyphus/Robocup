@@ -38,6 +38,8 @@ void moveForward(int millimeter) {
   degreeCounterR += degreeToTurn;
   motorLeft.MoveTo( degreeCounterL, carSpeed);
   motorRight.MoveTo(degreeCounterR, carSpeed);
+//  motorLeft.Move(-degreeToTurn, carSpeed);
+//  motorRight.Move(degreeToTurn, carSpeed);
   serialFeedback();
   delay(millimeter / carSpeed * processSpeed);
 }
