@@ -75,9 +75,10 @@ void loop() {
     // get the third 
     moveForward(220);
     delay(processSpeed * 5);
-//    while (!remoteService()) {
-//        Serial.println("wait");      
-//    }
+    Serial1.flush();
+    while (!remoteService()) {
+      //  Serial.println("wait");      
+    }
     grabOneTube();
     delay(processSpeed * 2);
     moveBackward(260);
@@ -87,6 +88,8 @@ void loop() {
     
     // the head must turn to the front this time
     
+    
+    // grab the second
     turnCCW135();
     delay(processSpeed * 2);
     moveForward(220);
@@ -99,6 +102,7 @@ void loop() {
     delay(processSpeed * 3);
     putOneObject();
     
+    // grab the third
     turnCW135();
     delay(processSpeed * 2);
     moveForward(220);
