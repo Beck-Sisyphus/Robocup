@@ -20,7 +20,7 @@ int headServo2=  headPort.pin2();
 // These constants are for running
 const int carSpeed = 40;
 const int slowTime = 30;// in millisecond
-const int processSpeed = 400;
+const int processSpeed = 300;
 
 // These two counters are for two motor;
 int degreeCounterL = 0;
@@ -33,8 +33,11 @@ double Setpoint, Input, Output;
 PID myPID(&Input, &Output, &Setpoint,5,0.01,0.001, DIRECT);
 
 /// move states:
-enum        {GRAB_ONE, GRAB_TWO, MOV_LEFT, MOV_RIGHT, MOV_FORWARD, MOV_BACK, MOV_PID, MOV_ROTATE_L, MOV_ROTATE_R, MOV_AROUND, MOV_STOP};
-const char* states[] = {"Grab_One", "Grab_Two", "Left", "Right", "Forward", "Back", "Moving with PID control" , "Rotate Left", "Rotate Right" , "Turn Around",  "Stop"};
+enum                   { GRAB_ONE ,  GRAB_TWO,MOV_LEFT, MOV_RIGHT, MOV_FORWARD, MOV_BACK, MOV_PID,              MOV_ROTATE_L, MOV_ROTATE_R,     MOV_AROUND,  MOV_STOP, 
+                         RED,  GREEN , BLUE , BLACK , WHITE };
+const char* states[] = {"Grab_One", "Grab_Two", "Left", "Right", "Forward", "Back", "Moving with PID control" , "Rotate Left", "Rotate Right" , "Turn Around",  "Stop"
+                         "Color red", "Color green", "Color blue", "Color black", "Color white"};
+int commandState = MOV_STOP;    // what robot is told to do
 
 
 /********** Here are the constant for PID testing*/

@@ -49,36 +49,38 @@ void moveBackward(int millimeter) {
 // post: turn to left for 90 degree;
 
 const int turnAroundDegree = 1360;
+const int turn135 = 510;
 const float oneCircle = 360.0;
+
 void turnCountClockwise() {
-  turnToRight(-90.0);
+  turnToRight(- turnAroundDegree / 4);
 }
 
 // post: turn to right for 90 degree;
 void turnClockwise() {
-  turnToRight(90.0);
+  turnToRight(turnAroundDegree / 4);
 }
 
 // post: safely turn 180 degree without touching the object
 void turnAround() {
   moveBackward(20);
-  turnToRight(360.0);
+  turnToRight(turnAroundDegree);
 }
 
 void turnCW45() {
-  turnToRight(45.0);
+  turnToRight(turnAroundDegree / 8 );
 } 
 
 void turnCCW45() {
-  turnToRight(-45.0);
+  turnToRight(- turnAroundDegree / 8 );
 }
 
 void turnCW135() {
-  turnToRight(135.0);
+  turnToRight( turn135 );
 }
 
 void turnCCW135() {
-  turnToRight(-135.0);
+  turnToRight(-turn135);
 }
 
 void turnToLeft(int angleTurning) {
@@ -87,10 +89,10 @@ void turnToLeft(int angleTurning) {
 
 // post: Turning Right for the given angle
 //       It will turn left if input is negative
-void turnToRight(float angleTurning) {
-  int degreeTurning = (int)(angleTurning / oneCircle * turnAroundDegree);
-  degreeCounterL += degreeTurning;
-  degreeCounterR += degreeTurning;
+void turnToRight(int degreeTurning) {
+  // int degreeTurning = (int)(angleTurning / oneCircle * turnAroundDegree);
+  degreeCounterL -= degreeTurning;
+  degreeCounterR -= degreeTurning;
   makeTurn( degreeCounterL, degreeCounterR);
 }
 
@@ -100,6 +102,7 @@ void makeTurn(int degreeL, int degreeR) {
   motorRight.MoveTo(degreeR, carSpeed);
   serialFeedback();
   delay(processSpeed);
+  serialFeedback();
 } 
 
 

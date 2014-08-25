@@ -16,7 +16,7 @@ const int handClose = 115;
 const int rise = 120;
 const int fall = 50;
 const int knock = 20;
-const int middle = 60;
+const int middle = 55;
 const int startGrabSignal = 101;
 // const int endGrabSignal = 102;
 void servoBegin() {
@@ -79,3 +79,4 @@ void releaseOneTube() {
   moveBackward(40);
   delay(1000);  
 }
+

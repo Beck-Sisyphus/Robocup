@@ -7,8 +7,8 @@
 const char MOVE_FORWARD = 'f'; // move forward
 const char MOVE_PID     = 'i'; // rotation angle (minus rotates CCW)
 const char MOVE_BACK    = 'b'; // move backwards
-const char MOVE_LEFT    = 'l'; // move left
-const char MOVE_RIGHT   = 'r'; // move right 
+//const char MOVE_LEFT    = 'l'; // move left
+//const char MOVE_RIGHT   = 'r'; // move right 
 const char PIVOT_CW     = 'c'; // rotate 90 degrees CW
 const char PIVOT_CCW    = 'C'; // rotate 90 degrees CCW
 const char PIVOT_CW_45  = 'q'; // rotate 45 degrees CW
@@ -17,29 +17,34 @@ const char PIVOT_CW_135 = 'j'; // rotate 135 degrees CW
 const char PIVOT_CCW_135= 'J'; // rotate 135 degrees CCW
 const char PIVOT_CW_180 = 't'; // rotate 180 degrees (default CW)
 
+const char COLOR_RED    = 'R';
+const char COLOR_GREEN  = 'G';
+const char COLOR_BLUE   = 'B';
+const char COLOR_BLACK  = 'K';
+const char COLOR_WHITE  = 'W';
+
 const char GRAB_ONE_TUBE= 'g'; // grab only one tube
 const char GRAB_TWO_TUBE= 'G'; // grab the second tube
 const char HALT_SLOW    = 'h'; // stop moving
 const char HALT_FAST    = 'H'; // stop moving
 
-// not used in this example
-const char MOVE_SPEED        = 's'; 
-const char MOVE_SLOWER       = 'v'; // reduce speed 
-const char MOVE_FASTER       = '^'; // increase speed 
  
-int commandState = MOV_STOP;    // what robot is told to do
 
-void remoteService() {
+
+boolean remoteService() {
     if(Serial1.available() ) {
         int cmd = Serial1.read();
         Serial.println(cmd);
         processCommand(cmd);   
+        return true;
     }  
+    return false;
 }
 
 void processCommand(int cmd) {
   int val = 0;
-  if( cmd == MOVE_RIGHT || cmd == MOVE_LEFT || cmd == MOVE_FORWARD || cmd == MOVE_BACK || MOVE_PID ) {
+  if( // cmd == MOVE_RIGHT || cmd == MOVE_LEFT || 
+      cmd == MOVE_FORWARD || cmd == MOVE_BACK || MOVE_PID ) {
     val =  Serial1.parseInt();
     Serial.println(val);
   }
@@ -62,12 +67,15 @@ void processCommand(int cmd, int val) {
     case PIVOT_CCW_45  : changeCmdState(MOV_ROTATE_L); turnCCW45();          break;
     case PIVOT_CCW_135 : changeCmdState(MOV_ROTATE_L); turnCCW135();         break;
     case PIVOT_CW_180  : changeCmdState(MOV_AROUND);   turnAround();         break; 
-    case MOVE_LEFT     : changeCmdState(MOV_LEFT);     turnToLeft(val);     break;
-    case MOVE_RIGHT    : changeCmdState(MOV_RIGHT);    turnToRight(val);    break;
+    
+    case COLOR_RED     : changeCmdState(RED);          break;  
+    case COLOR_GREEN   : changeCmdState(GREEN);        break; 
+    case COLOR_BLUE    : changeCmdState(BLUE);         break; 
+    case COLOR_BLACK   : changeCmdState(BLACK);        break;
+    case COLOR_WHITE   : changeCmdState(WHITE);        break;
+ //   case MOVE_LEFT     : changeCmdState(MOV_LEFT);     turnToLeft(val);     break;
+ //   case MOVE_RIGHT    : changeCmdState(MOV_RIGHT);    turnToRight(val);    break;
  //  case PIVOT         : changeCmdState(MOV_ROTATE_R); turnToRight(val);     break; 
-    case HALT_SLOW     : changeCmdState(MOV_STOP);     stopSlowly();         break;
-    case HALT_FAST     : changeCmdState(MOV_STOP);     stopSuddenly();       break;
- //  case SPEED        : speed = val;                  moveSetSpeed(speed); break;
   }    
 }
 

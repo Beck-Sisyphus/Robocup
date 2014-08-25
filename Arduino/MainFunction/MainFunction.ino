@@ -30,24 +30,146 @@ void loop() {
 // Test program for video
 void loop() {
     servoHold();
-    delay(processSpeed * 20);
-
-    // moveForward(740);
-    moveForward(960);
+    delay(processSpeed * 40);
+    moveForward(740);
     delay(processSpeed * 10);
-    // moveForward(220);
-    // delay(processSpeed * 10);
+    turnCountClockwise();
+    delay(processSpeed * 5);
+    moveForward(220);
+    delay(processSpeed * 8);
     grabOneTube();
     delay(processSpeed * 2);
+    
+    // put the first one out
+    moveBackward(260);
+    delay(processSpeed * 10);
+    turnCCW135();
+    delay(processSpeed * 3);
     moveForward(370);
     delay(processSpeed * 10);
     releaseOneTube();
     delay(processSpeed * 2);
-    turnAround();
-    delay(processSpeed * 10);    
+    moveBackward(330);
+    delay(processSpeed * 10);
+    turnCCW135();
+    delay(processSpeed * 3);
+    
+    // get the second 
+    moveForward(220);
+    delay(processSpeed * 5);
+    grabOneTube();
+    delay(processSpeed * 2);
+    moveBackward(260);
+    delay(processSpeed * 5);
+    turnCCW135();
+    delay(processSpeed * 3);
+    moveForward(370);
+    delay(processSpeed * 5);
+    releaseOneTube();
+    delay(processSpeed * 2);
+    moveBackward(330);
+    delay(processSpeed * 10);
+    turnCCW135();
+    delay(processSpeed * 3);
+    
+    // get the third 
+    moveForward(220);
+    delay(processSpeed * 5);
+//    while (!remoteService()) {
+//        Serial.println("wait");      
+//    }
+    grabOneTube();
+    delay(processSpeed * 2);
+    moveBackward(260);
+    delay(processSpeed * 5);
+    
+    putOneObject();
+    
+    // the head must turn to the front this time
+    
+    turnCCW135();
+    delay(processSpeed * 2);
+    moveForward(220);
+    delay(processSpeed * 10);
+    grabOneTube();
+    delay(processSpeed * 2);
+    moveBackward(260);
+    delay(processSpeed * 10);
+    turnCW135();
+    delay(processSpeed * 3);
+    putOneObject();
+    
+    turnCW135();
+    delay(processSpeed * 2);
+    moveForward(220);
+    delay(processSpeed * 10);
+    grabOneTube();
+    delay(processSpeed * 2);
+    moveBackward(260);
+    delay(processSpeed * 10);
+    turnCCW135();
+    delay(processSpeed * 3);
+    putOneObject();
 }
 
 
+void putOneObject() {
+    if (commandState == RED) {
+        turnCountClockwise();
+        delay(processSpeed * 2);
+        moveForward(740);
+        delay(processSpeed * 10);
+        releaseOneTube();
+        delay(processSpeed * 3);
+        changeCmdState(MOV_STOP);
+        moveBackward(740);
+        delay(processSpeed * 10);
+    } else if (commandState == GREEN) {
+        turnAround();
+        delay(processSpeed * 2);
+        moveForward(740);
+        delay(processSpeed * 10);
+        releaseOneTube();
+        delay(processSpeed * 3);
+        changeCmdState(MOV_STOP);
+        moveBackward(740);
+        delay(processSpeed * 10);
+        turnClockwise();
+    } else if (commandState == BLUE) {
+        turnCCW135();
+        delay(processSpeed * 2);
+        moveForward(740);
+        delay(processSpeed * 10);
+        releaseOneTube();
+        delay(processSpeed * 3);
+        changeCmdState(MOV_STOP);
+        moveBackward(740);
+        delay(processSpeed * 10);
+        turnCW45();
+    } else if (commandState == BLACK) {
+        turnCCW45();
+        delay(processSpeed * 2);
+        moveForward(740);
+        delay(processSpeed * 10);
+        releaseOneTube();
+        delay(processSpeed * 3);
+        changeCmdState(MOV_STOP);
+        moveBackward(740);
+        delay(processSpeed * 10);
+        turnCCW45();
+    } else if (commandState == WHITE) {
+        moveForward(740);
+        delay(processSpeed * 10);
+        releaseOneTube();
+        delay(processSpeed * 3);
+        changeCmdState(MOV_STOP);
+        moveBackward(740);
+        delay(processSpeed * 10);
+        turnCountClockwise();
+    }
+    delay(processSpeed * 2);
+    
+}
 /*
 void loop()
 {
