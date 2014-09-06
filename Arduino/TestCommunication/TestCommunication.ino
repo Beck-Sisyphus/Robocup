@@ -19,6 +19,10 @@ void setup()
 }
 
 void loop() {
+   moveForward(200);
    remoteService();
-   delay(1000); 
+   delay(10000);
+   motorLeft.Reset();
+   motorRight.Reset();
+   delay(5000); 
 }

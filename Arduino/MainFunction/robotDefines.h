@@ -20,7 +20,7 @@ int headServo2=  headPort.pin2();
 // These constants are for running
 const int carSpeed = 40;
 const int slowTime = 30;// in millisecond
-const int processSpeed = 300;
+const int processSpeed = 200;
 
 // These two counters are for two motor;
 int degreeCounterL = 0;

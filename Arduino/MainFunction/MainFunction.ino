@@ -22,24 +22,29 @@ void setup()
 void loop() {
     servoHold();
     delay(processSpeed * 30);
-    turnAround();
+    moveForward(370);
+    delay(processSpeed * 10);
+    grabOneTube();
+    delay(processSpeed * 10);
+    moveBackward(430);
     delay(processSpeed * 10);
 }
 */
-
 // Test program for video
 void loop() {
     servoHold();
     delay(processSpeed * 40);
     moveForward(740);
     delay(processSpeed * 10);
-    turnCountClockwise();
-    delay(processSpeed * 5);
-    moveForward(220);
-    delay(processSpeed * 8);
+    // turnCountClockwise();
+    // delay(processSpeed * 5);
+    // moveForward(220);
+    // delay(processSpeed * 8);
     grabOneTube();
     delay(processSpeed * 2);
-    
+}
+
+/*
     // put the first one out
     moveBackward(260);
     delay(processSpeed * 10);
@@ -53,6 +58,8 @@ void loop() {
     delay(processSpeed * 10);
     turnCCW135();
     delay(processSpeed * 3);
+    // The head should point to the C point
+    
     
     // get the second 
     moveForward(220);
@@ -122,9 +129,12 @@ void loop() {
     turnCCW135();
     delay(processSpeed * 3);
     putOneObject();
+
+    // Go home
+    moveBackward(740);
+    delay(processSpeed * 100);
 }
-
-
+*/
 void putOneObject() {
     if (commandState == RED) {
         turnCountClockwise();
